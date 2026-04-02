@@ -38,7 +38,7 @@ Examples:
   OMX_PROVIDER=claude omx-provider setup
 `;
 
-function parseArgs(args: string[]): {
+export function parseArgs(args: string[]): {
   command: string;
   provider?: string;
   projectLocal: boolean;
