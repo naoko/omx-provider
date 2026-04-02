@@ -6,9 +6,10 @@ Install [oh-my-codex](https://github.com/Yeachan-Heo/oh-my-codex) prompts, skill
 
 | Provider | Home dir | Prompt injection | CLI |
 | --- | --- | --- | --- |
-| `codex` | `~/.codex/` | `config.toml` key | `codex` |
 | `claude` | `~/.claude/` | `CLAUDE.md` | `claude` |
 | `cursor` | `~/.cursor/` | `.cursorrules` | Cursor IDE |
+
+> For OpenAI Codex CLI, use `omx setup` directly — OMX handles Codex natively.
 
 ## Quick start
 
@@ -46,7 +47,7 @@ omx-provider help                      Show help
 ### Options
 
 ```
---provider <name>   Target provider: codex, claude, cursor
+--provider <name>   Target provider: claude, cursor
 --project           Install to project directory instead of user home
 --verbose           Show detailed output
 --dry-run           Show what would happen without doing it

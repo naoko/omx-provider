@@ -20,7 +20,6 @@ Usage:
   omx-provider help                      Show this help message
 
 Providers:
-  codex    OpenAI Codex CLI (~/.codex/)
   claude   Claude Code (~/.claude/)
   cursor   Cursor (~/.cursor/)
 

@@ -8,11 +8,10 @@
 import { homedir } from "os";
 import { join } from "path";
 
-export const PROVIDER_NAMES = ["codex", "claude", "cursor"] as const;
+export const PROVIDER_NAMES = ["claude", "cursor"] as const;
 export type ProviderName = (typeof PROVIDER_NAMES)[number];
 
 export type PromptInjection =
-  | { type: "config-key"; key: string; format: "toml" }
   | { type: "markdown-file"; filename: string }
   | { type: "rules-file"; filename: string };
 
@@ -46,18 +45,6 @@ export interface Provider {
 }
 
 const PROVIDERS: Record<ProviderName, Provider> = {
-  codex: {
-    displayName: "OpenAI Codex CLI",
-    cliCommand: "codex",
-    homeDir: join(homedir(), ".codex"),
-    configFile: "config.toml",
-    configFormat: "toml",
-    projectDirName: ".codex",
-    promptInjection: { type: "config-key", key: "developer_instructions", format: "toml" },
-    skillsDir: "skills",
-    promptsDir: "prompts",
-  },
-
   claude: {
     displayName: "Claude Code",
     cliCommand: "claude",
