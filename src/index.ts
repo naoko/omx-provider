@@ -2,7 +2,9 @@
  * omx-provider - public API
  *
  * Install oh-my-codex prompts, skills, and agents into
- * Claude Code, Cursor, or any supported AI coding tool.
+ * Claude Code, Cursor, Codex, or any supported AI coding tool.
+ *
+ * Also transforms Anthropic Claude Code plugins for other platforms.
  */
 
 export {
@@ -21,3 +23,27 @@ export {
   listOmxSkills,
   listOmxAgents,
 } from "./resolver.js";
+
+export {
+  readPlugin,
+  readPluginDirectory,
+  parseFrontmatter,
+  type ParsedPlugin,
+  type PluginManifest,
+  type PluginCommand,
+  type PluginAgent,
+  type PluginSkill,
+  type PluginHook,
+  type PortabilityLevel,
+} from "./plugin-reader.js";
+
+export {
+  transformPlugin,
+  analyzeTransform,
+  formatAnalysis,
+  type TransformOptions,
+  type TransformResult,
+  type TransformAnalysis,
+  type PluginAnalysis,
+  type FileAction,
+} from "./plugin-transformer.js";

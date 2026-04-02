@@ -8,7 +8,7 @@
 import { homedir } from "os";
 import { join } from "path";
 
-export const PROVIDER_NAMES = ["claude", "cursor"] as const;
+export const PROVIDER_NAMES = ["claude", "cursor", "codex"] as const;
 export type ProviderName = (typeof PROVIDER_NAMES)[number];
 
 export type PromptInjection =
@@ -65,6 +65,18 @@ const PROVIDERS: Record<ProviderName, Provider> = {
     configFormat: "json",
     projectDirName: ".cursor",
     promptInjection: { type: "rules-file", filename: ".cursorrules" },
+    skillsDir: "skills",
+    promptsDir: "prompts",
+  },
+
+  codex: {
+    displayName: "OpenAI Codex",
+    cliCommand: "codex",
+    homeDir: join(homedir(), ".codex"),
+    configFile: "config.json",
+    configFormat: "json",
+    projectDirName: ".codex",
+    promptInjection: { type: "markdown-file", filename: "AGENTS.md" },
     skillsDir: "skills",
     promptsDir: "prompts",
   },

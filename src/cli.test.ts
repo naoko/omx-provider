@@ -94,4 +94,61 @@ describe("parseArgs", () => {
     const result = parseArgs(["setup", "--provider", "claude"]);
     assert.equal(result.provider, "claude");
   });
+
+  // Transform command tests
+  it("parses transform command with --source and --target", () => {
+    const result = parseArgs(["transform", "--source", "./plugins/feature-dev", "--target", "cursor"]);
+    assert.equal(result.command, "transform");
+    assert.equal(result.source, "./plugins/feature-dev");
+    assert.equal(result.target, "cursor");
+  });
+
+  it("parses --source= syntax", () => {
+    const result = parseArgs(["transform", "--source=./plugins", "--target=codex"]);
+    assert.equal(result.source, "./plugins");
+    assert.equal(result.target, "codex");
+  });
+
+  it("parses -s and -t shorthands", () => {
+    const result = parseArgs(["transform", "-s", "./plugins", "-t", "cursor"]);
+    assert.equal(result.source, "./plugins");
+    assert.equal(result.target, "cursor");
+  });
+
+  it("parses --output flag for transform", () => {
+    const result = parseArgs(["transform", "--source", ".", "--target", "cursor", "--output", "/tmp/out"]);
+    assert.equal(result.output, "/tmp/out");
+  });
+
+  it("parses --output= syntax", () => {
+    const result = parseArgs(["transform", "--source", ".", "--target", "cursor", "--output=/tmp/out"]);
+    assert.equal(result.output, "/tmp/out");
+  });
+
+  it("parses -o shorthand for output", () => {
+    const result = parseArgs(["transform", "-s", ".", "-t", "cursor", "-o", "/tmp/out"]);
+    assert.equal(result.output, "/tmp/out");
+  });
+
+  it("transform with --verbose and --dry-run", () => {
+    const result = parseArgs(["transform", "-s", ".", "-t", "codex", "--verbose", "--dry-run"]);
+    assert.equal(result.command, "transform");
+    assert.ok(result.verbose);
+    assert.ok(result.dryRun);
+  });
+
+  it("parses --yes flag", () => {
+    const result = parseArgs(["transform", "-s", ".", "-t", "cursor", "--yes"]);
+    assert.ok(result.yes);
+  });
+
+  it("parses -y shorthand", () => {
+    const result = parseArgs(["transform", "-s", ".", "-t", "cursor", "-y"]);
+    assert.ok(result.yes);
+  });
+
+  it("yes defaults to false", () => {
+    const result = parseArgs(["transform", "-s", ".", "-t", "cursor"]);
+    assert.equal(result.yes, false);
+  });
 });

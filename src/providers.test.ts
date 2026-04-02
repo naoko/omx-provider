@@ -9,12 +9,8 @@ import {
 } from "./providers.js";
 
 describe("PROVIDER_NAMES", () => {
-  it("includes claude and cursor", () => {
-    assert.deepStrictEqual([...PROVIDER_NAMES], ["claude", "cursor"]);
-  });
-
-  it("does not include codex (handled natively by OMX)", () => {
-    assert.ok(!PROVIDER_NAMES.includes("codex" as any));
+  it("includes claude, cursor, and codex", () => {
+    assert.deepStrictEqual([...PROVIDER_NAMES], ["claude", "cursor", "codex"]);
   });
 });
 
@@ -22,10 +18,10 @@ describe("isProviderName", () => {
   it("returns true for valid providers", () => {
     assert.ok(isProviderName("claude"));
     assert.ok(isProviderName("cursor"));
+    assert.ok(isProviderName("codex"));
   });
 
   it("returns false for invalid providers", () => {
-    assert.ok(!isProviderName("codex"));
     assert.ok(!isProviderName("vscode"));
     assert.ok(!isProviderName(""));
   });
@@ -66,6 +62,25 @@ describe("getProvider", () => {
     assert.equal(
       (cursor.promptInjection as { filename: string }).filename,
       ".cursorrules",
+    );
+  });
+
+  it("returns codex config with correct paths", () => {
+    const codex = getProvider("codex");
+    assert.equal(codex.displayName, "OpenAI Codex");
+    assert.equal(codex.cliCommand, "codex");
+    assert.equal(codex.homeDir, join(homedir(), ".codex"));
+    assert.equal(codex.configFile, "config.json");
+    assert.equal(codex.configFormat, "json");
+    assert.equal(codex.projectDirName, ".codex");
+  });
+
+  it("codex uses AGENTS.md for prompt injection", () => {
+    const codex = getProvider("codex");
+    assert.equal(codex.promptInjection.type, "markdown-file");
+    assert.equal(
+      (codex.promptInjection as { filename: string }).filename,
+      "AGENTS.md",
     );
   });
 });
