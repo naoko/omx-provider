@@ -1,0 +1,33 @@
+{
+  "name": "omx-provider",
+  "version": "0.1.0",
+  "description": "Install oh-my-codex prompts, skills, and agents into Claude Code, Cursor, or any supported AI coding tool",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "omx-provider": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "keywords": [
+    "oh-my-codex",
+    "omx",
+    "claude-code",
+    "cursor",
+    "codex",
+    "ai-coding",
+    "workflow"
+  ],
+  "author": "Naoko",
+  "license": "MIT",
+  "dependencies": {
+    "oh-my-codex": "^0.11.11"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^20.0.0"
+  }
+}
